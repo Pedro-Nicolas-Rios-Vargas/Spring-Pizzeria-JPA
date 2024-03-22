@@ -1,0 +1,48 @@
+version: 2.23.0
+
+services:
+  pizza_db:
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p$(cat $$MYSQL_ROOT_PASSWORD_FILE)"]
+    # build: ./mysql_pizzeria/
+    image: mysql:latest
+    volumes:
+      - ./db:/usr/src
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_pass
+      MYSQL_DATABASE_FILE: /run/secrets/db_name
+    secrets:
+      - db_root_pass
+      - db_name
+
+  pizzeria_dev_app:
+    image: gradle:latest
+    command: ["./gradlew", "bootRun"]
+    volumes:
+      - .:/home/gradle/project
+    working_dir: "/home/gradle/project"
+    environment:
+      PORT: 80
+    ports:
+      - "8080:80"
+    depends_on:
+      pizza_db:
+        condition: "service_healthy"
+    secrets:
+      - db_root_pass
+      - db_name
+
+
+secrets:
+  db_root_pass:
+    file: ./db_root_pass.txt
+  db_username:
+    file: ./db_username.txt
+  db_pass:
+    file: ./db_pass.txt
+  db_name:
+    file: ./db_name.txt
+
+volumes:
+  mysql-data:
