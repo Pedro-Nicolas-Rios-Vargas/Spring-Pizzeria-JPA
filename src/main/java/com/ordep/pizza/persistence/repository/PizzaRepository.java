@@ -10,4 +10,14 @@ public interface PizzaRepository
     List<PizzaEntity> findAllByAvailableTrueOrderByPrice();
 
     PizzaEntity findByAvailableTrueAndNameIgnoreCase(String name);
+
+    /*
+     *  Also can use:
+     *  -> getAllBy...
+     *  -> queryAllBy...
+     *  -> searchAllBy...
+     */
+    List<PizzaEntity> findAllByAvailableTrueAndDescriptionContainingIgnoreCase(String description);
+
+    List<PizzaEntity> findAllByAvailableTrueAndDescriptionNotContainingIgnoreCase(String description);
 }
