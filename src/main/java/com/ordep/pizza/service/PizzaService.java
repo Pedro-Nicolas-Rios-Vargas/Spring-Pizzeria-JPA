@@ -3,12 +3,14 @@ package com.ordep.pizza.service;
 import com.ordep.pizza.persistence.entity.PizzaEntity;
 import com.ordep.pizza.persistence.repository.PizzaPagSortRepository;
 import com.ordep.pizza.persistence.repository.PizzaRepository;
+import com.ordep.pizza.service.dto.UpdatePizzaPriceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -70,5 +72,10 @@ public class PizzaService {
 
     public void delete(int idPizza) {
         this.pizzaRepository.deleteById(idPizza);
+    }
+
+    @Transactional
+    public void updatePrice(UpdatePizzaPriceDTO dto) {
+        this.pizzaRepository.updatePrice(dto);
     }
 }
