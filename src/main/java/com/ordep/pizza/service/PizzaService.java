@@ -75,7 +75,7 @@ public class PizzaService {
         this.pizzaRepository.deleteById(idPizza);
     }
 
-    @Transactional(noRollbackFor = EmailAPIException.class, propagation = Pr)
+    @Transactional(noRollbackFor = EmailAPIException.class)
     public void updatePrice(UpdatePizzaPriceDTO dto) {
         this.pizzaRepository.updatePrice(dto);
         this.sendEmail();
