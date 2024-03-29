@@ -1,4 +1,4 @@
-package com.ordep.pizza.persistence.entity;
+package com.ordep.pizza.persistence.audit;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
