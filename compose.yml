@@ -18,14 +18,18 @@ services:
 
   pizzeria_dev_app:
     image: gradle:latest
+    # Just turn off org.gradle.debug for stop gradle debug mode
     command: ["./gradlew", "bootRun"]
     volumes:
       - .:/home/gradle/project
     working_dir: "/home/gradle/project"
     environment:
       PORT: 80
+      ASDF: "SA"
+      # JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
     ports:
       - "8080:80"
+      - "5005:5005"
     depends_on:
       pizza_db:
         condition: "service_healthy"
