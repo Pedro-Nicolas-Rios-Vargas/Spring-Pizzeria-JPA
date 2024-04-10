@@ -1,6 +1,6 @@
 const requestBody = {
   "headers": {
-    "Authorization": "Basic dXNlcjo4MjI0NWE3Zi0yYjIxLTQ0NDAtYjM3My00MDQwNzY5NTU4M2I="
+    "Authorization": "Basic dXNlcjpjMzY5MGZhOC0wZjc1LTRiNjQtYTE2ZC1hZDI0N2UwMGI1YTI="
   }
 };
 
